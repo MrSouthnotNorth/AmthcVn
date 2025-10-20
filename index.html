@@ -94,9 +94,7 @@
             display:block;
             transition: transform 600ms var(--transition);
         }
-        .slide:hover img{ transform: scale(1.04); } /* hover zoom nhẹ */
-
-        /* slide overlay style (bamboo + stork motifs as subtle decorations) */
+        .slide:hover img{ transform: scale(1.04); }
         .slide::after{
             content:"";
             position:absolute;
@@ -192,16 +190,25 @@
         .dialog h2{margin:0 0 6px}
         .variants, .toppings{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
         .chip{background:#f2f7ef;padding:6px 10px;border-radius:999px;border:1px solid rgba(0,0,0,0.04);font-size:13px}
-
-        /* comments box */
+        .chip-preview{
+            position:absolute;
+            bottom:calc(100% + 8px);
+            left:50%;
+            transform:translateX(-50%) scale(0.9);
+            width:100px;
+            height:75px;
+            border-radius:8px;
+            box-shadow:var(--shadow);
+            pointer-events:none;
+            opacity:0;
+            transition: all 200ms cubic-bezier(.2,.9,.3,1);
+        }
         .comments{
             margin-top:14px;border-radius:10px;padding:10px;background:#fafafa;border:1px solid #eee;
             max-height:180px;overflow:auto;
         }
         .cmt{padding:8px;border-bottom:1px dashed rgba(0,0,0,0.04);font-size:14px}
         .cmt:last-child{border-bottom:0}
-
-        /* comment preview on menu card: single visible comment with avatar + name + smooth scroll */
         .comment-preview{ display:flex; align-items:center; gap:10px; margin-top:8px; }
         .comment-preview .cavatar{
             width:44px; height:44px; min-width:44px; border-radius:50%;
@@ -211,7 +218,6 @@
         }
         .comment-preview .cmeta{ flex:1; background:#fff; padding:8px 10px; border-radius:8px; box-shadow:var(--shadow); font-size:13px; color:#333; }
         .comment-preview .cmeta .cname{ font-weight:700; font-size:13px; color:#2c3b2b; margin-bottom:4px; }
-        /* smooth, snap-scrolling comment area */
         .comment-preview .cmeta .ctext{
             font-size:13px;
             color:#444;
@@ -220,7 +226,7 @@
             overflow:auto;
             scroll-behavior:smooth;
             scroll-snap-type:y mandatory;
-            -webkit-overflow-scrolling: touch; /* smoother momentum on mobile */
+            -webkit-overflow-scrolling: touch;
         }
         .comment-preview .cmeta .ctext::-webkit-scrollbar{ width:8px; height:6px; }
         .comment-preview .cmeta .ctext::-webkit-scrollbar-thumb{ background:rgba(0,0,0,0.08); border-radius:8px; }
@@ -232,10 +238,12 @@
             padding:2px 0;
             line-height:1.2;
         }
-         .card .comment-preview{ margin-top:auto } /* keep preview near bottom of card */
-
-        /* footer notices for unfinished tabs */
+         .card .comment-preview{ margin-top:auto }
         .coming{padding:30px;text-align:center;color:#666;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;border:1px dashed #eee}
+        @keyframes fadeInUp{ from{ opacity:0; transform: translateY(12px)} to{ opacity:1; transform: translateY(0)} }
+        .reveal{ animation: fadeInUp 520ms var(--transition) both; animation-delay: var(--d, 0ms); }
+        .slides, .slide, .slide img{ user-select:none; -webkit-user-select:none; -ms-user-select:none; -webkit-user-drag:none; }
+        .carousel.grabbing{ cursor:grabbing; }
 
         @media (max-width:700px){
             .intro{flex-direction:column}
@@ -249,24 +257,22 @@
 <body>
     <header>
         <div class="logo">
-            <!-- Thay ảnh logo của bạn tại đây -->
-            <img src="https://media.loveitopcdn.com/3807/la-co-viet-nam-dongphusongphu2.png" alt="logo">
+            <img src="images/logo/logo.png" alt="logo">
         </div>
         <h1>Ẩm thực Việt Nam</h1>
         <div class="dec" title="Trang trí">🏯</div>
     </header>
 
     <section class="hero">
-        <div class="carousel" id="carousel">
+        <div class="carousel reveal" id="carousel">
             <div class="slides" id="slides">
-                <!-- 7 slide (placeholder images). Bạn có thể thay src bằng ảnh thật -->
-                <div class="slide"><img src="https://media.vietravel.com/images/Content/am-thuc-viet-nam-thuoc-top-ngon-nhat-the-gioi-104749.jpg" alt=""></div>
-                <div class="slide"><img src="https://www.bonboncar.vn/blog/content/images/2025/08/pho-bo-ha-noi.jpeg" alt=""></div>
-                <div class="slide"><img src="https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/2023_3_4_638135494683018162_cach-lam-bun-cha-bang-noi-chien-khong-dau-1.jpg" alt=""></div>
-                <div class="slide"><img src="https://i-giadinh.vnecdn.net/2024/03/07/7Honthinthnhphm1-1709800144-8583-1709800424.jpg" alt=""></div>
-                <div class="slide"><img src="https://cdn.tcdulichtphcm.vn/upload/1-2024/images/2024-03-15/1710445729-picture-1-1710445636-793-width1200height900.jpg" alt=""></div>
-                <div class="slide"><img src="https://nhahangcontoc.com/wp-content/uploads/2023/03/banh-bot-loc-2-093047ad.jpg" alt=""></div>
-                <div class="slide"><img src="https://i.ytimg.com/vi/CSI9ildGX9s/maxresdefault.jpg" alt=""></div>
+                <div class="slide"><img src="images/Banner/banner-slide-1.jpg" alt></div>
+                <div class="slide"><img src="images/Banner/banner-slide-2.jpg" alt></div>
+                <div class="slide"><img src="images/Banner/banner-slide-3.jpg" alt></div>
+                <div class="slide"><img src="images/Banner/banner-slide-4.jpg" alt></div>
+                <div class="slide"><img src="images/Banner/banner-slide-5.jpg" alt></div>
+                <div class="slide"><img src="images/Banner/banner-slide-6.jpg" alt></div>
+                <div class="slide"><img src="images/Banner/banner-slide-7.jpg" alt></div>
             </div>
 
             <div class="carousel-controls">
@@ -290,13 +296,46 @@
 
     <main class="content">
         <section id="intro" class="pane active">
-            <div class="intro">
-                <img src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2023/9/29/1247753/Am-Thuc-Viet-Nam.jpeg" alt="Giới thiệu">
+            <div class="intro reveal">
+                <img src="images/introduce/introduce-slide-1.jpg" alt="Tinh tế của hương vị">
                 <div class="txt">
-                    <h3>Giới thiệu ẩm thực truyền thống Việt Nam</h3>
+                    <h3>Ẩm thực VIỆT NAM-Bản giao hưởng tinh tế của hương vị</h3>
                     <p>
-                        Ẩm thực Việt Nam đa dạng với các món phở, bún, bánh mì, chả, ram... Được chế biến từ nguyên liệu tươi,
-                        gia vị tinh tế, và sáng tạo theo vùng miền. Mỗi món ăn mang hương vị đặc trưng, phản ánh văn hóa và lịch sử phong phú của đất nước.
+                        Ẩm thực Việt Nam từ lâu đã vượt ra khỏi biên giới quốc gia để trở thành một trong những nền ẩm thực được yêu mến và đánh giá cao nhất trên thế giới. Đó không chỉ đơn thuần là những món ăn ngon, mà là một di sản văn hóa kết tinh từ lịch sử lâu đời, sự đa dạng địa lý và triết lý sống hài hòa của người Việt.
+                    </p>
+                </div>
+            </div>
+            <div class="intro reveal">
+                <img src="images/introduce/introduce-slide-2.jpg" alt="Cân bằng trong gia vị">
+                <div class="txt">
+                    <h3>Ẩm thực VIỆT NAM-Triết lý cân bằng trong gia vị</h3>
+                    <p>
+                        Điểm đặc sắc làm nên "linh hồn" của ẩm thực Việt là triết lý cân bằng Âm - Dương. Mỗi món ăn đều là một sự phối trộn hài hòa của ngũ vị (chua, cay, mặn, ngọt, đắng) và ngũ sắc (trắng, xanh, vàng, đỏ, đen), không chỉ kích thích vị giác mà còn tạo nên một tổng thể bổ dưỡng cho sức khỏe. Sự cân bằng này thể hiện ở việc các nguyên liệu mang tính "hàn" (lạnh) luôn được kết hợp với các gia vị mang tính "nhiệt" (nóng) và ngược lại, tạo nên sự quân bình hoàn hảo.
+                    </p>
+                </div>
+            </div>
+            <div class="intro reveal">
+                <img src="images/introduce/introduce-slide-3.jpg" alt="Thiên đường trong ẩm thực">
+                <div class="txt">
+                    <h3>Ẩm thực VIỆT NAM-Thiên đường của ẩm thực</h3>
+                    <p>
+                        Một trong những yếu tố chinh phục thực khách quốc tế chính là việc sử dụng vô vàn các loại rau thơm và nguyên liệu tươi mới. Hiếm có nền ẩm thực nào mà rau sống, thảo mộc (như húng quế, ngò rí, tía tô, kinh giới...) lại đóng vai trò quan trọng và đa dạng đến vậy. Chúng không chỉ là đồ trang trí mà là thành phần chủ đạo, mang đến sự thanh mát, bùng nổ hương thơm và làm giảm độ ngấy của các món chiên, nướng hay giàu đạm.
+                        Các món ăn Việt, đặc biệt là các loại nước dùng (như Phở, Bún Bò Huế), nổi tiếng với sự trong trẻo, thanh tao nhưng lại sâu sắc về hương vị, kết quả của quá trình ninh xương và thảo mộc công phu hàng giờ liền.
+                    </p>
+                </div>
+            </div>
+            <div class="intro reveal">
+                <img src="images/introduce/introduce-slide-4.jpg" alt="đa dạng bản sắc dân tộc trong ẩm thực">
+                <div class="txt">
+                    <h3>Ẩm thực VIỆT NAM-Sự đa dạng bản sắc</h3>
+                    <p>
+                        Ẩm thực Việt Nam là một bức tranh đa sắc màu với ba phong cách đặc trưng của ba miền:
+
+Ẩm thực miền Bắc: Chú trọng sự tinh tế, thanh tao với khẩu vị vừa vặn, không quá nồng gắt. Đây là nơi khai sinh ra những "quốc hồn quốc túy" như Phở Hà Nội, Bún Chả, Chả Cá Lã Vọng.
+
+Ẩm thực miền Trung: Nổi bật với hương vị đậm đà, mạnh mẽ và thiên về vị cay nồng. Vùng đất cố đô Huế đã đóng góp cho nền ẩm thực sự cầu kỳ, tinh xảo trong cả hương vị lẫn cách trình bày (như Bún Bò Huế, Bánh Bột Lọc, Cơm Hến).
+
+Ẩm thực miền Nam: Chịu ảnh hưởng của sự giao thoa văn hóa, mang đến hương vị phóng khoáng, ngọt ngào (từ đường, nước cốt dừa) và đa dạng (như Bánh Xèo, Gỏi Cuốn, Hủ Tiếu Nam Vang).
                     </p>
                 </div>
             </div>
@@ -310,7 +349,6 @@
                 </div>
 
                 <div class="grid" id="menuGrid">
-                    <!-- Cards sẽ được sinh động bằng JS -->
                 </div>
             </div>
         </section>
@@ -318,7 +356,6 @@
         <section id="reviews" class="pane">
             <h3>Đánh giá người dùng</h3>
             <div class="review-list" id="reviewList">
-                <!-- JS will render -->
             </div>
         </section>
 
@@ -335,7 +372,6 @@
         </section>
     </main>
 
-    <!-- Modal for dish details -->
     <div class="modal" id="modal">
         <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dlgTitle">
             <div style="display:flex;justify-content:space-between;align-items:center">
@@ -346,7 +382,7 @@
                 <button id="closeDlg" style="background:transparent;border:0;font-size:20px;cursor:pointer">✕</button>
             </div>
             <div class="top">
-                <img id="dlgImg" src="https://via.placeholder.com/400x260.png?text=Ảnh" alt="">
+                <img id="dlgImg" url="blob:https://www.messenger.com/cdd559da-d43e-4803-a603-093feb471d44" alt="">
                 <div style="flex:1">
                     <p id="dlgDesc" style="color:#444">Mô tả ngắn về món ăn.</p>
                     <div style="margin-top:10px">
@@ -360,66 +396,62 @@
 
             <div style="margin-top:12px;font-weight:700">Bình luận tiêu biểu</div>
             <div class="comments" id="dlgComments">
-                <!-- comments rendered here (with reviewer name + avatar + rating) -->
             </div>
         </div>
     </div>
 
     <script>
-        // Data for menu (thay src bằng ảnh của bạn)
         const dishes = [
-            { id:1, name:"Phở", img:"https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/2024_1_26_638418715174070559_pho-bo-anh-dai-dien.jpg", desc:"Phở truyền thống Hà Nội với nước dùng trong, thơm vị xương.", variants:["Phở tái","Phở gà","Phở nạm"], toppings:["Chanh","Ớt","Hành ngò"], comments:[
+            { id:1, name:"Phở", img:"images/Menu/Pho/pho.jpg", desc:"Phở (chữ Nôm: 𬖾) là một món ăn truyền thống của Việt Nam, được xem là một trong những món ăn tiêu biểu cho nền ẩm thực Việt Nam.", variants:[{name:"Phở tái nạm", img:"images/Menu/pho/pho-tai-nam.jpg"},{name:"Phở gà", img:"images/Menu/Pho/pho-ga.jpg"},{name:"Phở gầu", img:"images/Menu/Pho/pho-gau.jpg"}], toppings:[{name:"Chanh", img:"images/Menu/TOPPING/chanh.jpg"},{name:"Ớt", img:"images/Menu/TOPPING/ot.jpg"},{name:"Hành ngò", img:"images/Menu/TOPPING/hanhngo.jpg"},{name:"Quẩy", img:"images/Menu/TOPPING/quay.jpg"}], comments:[
                 {name:"Lan", text:"Ngon chuẩn vị!", rating:5},
                 {name:"Minh", text:"Nước dùng thanh, thơm.", rating:5},
                 {name:"An", text:"Phục vụ nhanh, bánh phở mềm.", rating:4},
                 {name:"Hà", text:"Giá hợp lý, sẽ quay lại.", rating:5},
                 {name:"Trung", text:"Đậm đà, rất vừa miệng.", rating:5}
             ], rating:4.7},
-            { id:2, name:"Bánh Mì", img:"https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/2024_2_19_638439762164888519_cach-lam-banh-mi-pate-trung-7.jpg", desc:"Bánh mì giòn rụm, nhân pha trộn chả, pate và rau thơm.", variants:["Bánh mì chả","Bánh mì đặc biệt"], toppings:["Pate","Ớt","Rau thơm"], comments:[
+            { id:2, name:"Bánh Mì", img:"images/Menu/Banh_mi/banhmi.jpg", desc:"Bánh mì là một loại baguette của Việt Nam với lớp vỏ ngoài giòn tan, ruột mềm, còn bên trong là phần nhân. Tùy theo văn hóa vùng miền hoặc sở thích cá nhân mà người ta có thể lựa chọn nhiều loại đồ ăn kèm khác nhau, ngoài ra tên gọi của bánh cũng phụ thuộc phần lớn vào những biến tấu ấy. Tuy nhiên, những phiên bản phổ biến nhất vẫn thường chứa chả lụa, thịt, hoặc thực phẩm chay, kèm theo một số nguyên liệu phụ khác như pa tê, bơ, rau, ớt, trứng và đồ chua.", variants:[{name:"Bánh mì chả", img:"images/Menu/Banh_mi/banhmicha.jpg"},{name:"Bánh mì thịt", img:"images/Menu/Banh_mi/banhmithit.jpg"}], toppings:[{name:"Pate", img:"images/Menu/TOPPING/pate.jpg"},{name:"Ớt", img:"images/Menu/TOPPING/ot.jpg"},{name:"Rau thơm", img:"images/Menu/TOPPING/rauthom.jpg"}], comments:[
                 {name:"Phúc", text:"Bánh giòn, nhân ngon.", rating:5},
                 {name:"Mai", text:"Tuyệt vời cho bữa sáng.", rating:4},
                 {name:"Quang", text:"Bỏ nhiều rau, tươi.", rating:4},
                 {name:"Linh", text:"Nước sốt đậm đà.", rating:5},
                 {name:"Hùng", text:"Phục vụ thân thiện.", rating:4}
             ], rating:4.5},
-            { id:3, name:"Bún Chả", img:"https://cdn2.fptshop.com.vn/unsafe/1920x0/filters:format(webp):quality(75)/2024_1_12_638406880045931692_cach-lam-bun-cha-ha-noi-0.jpg", desc:"Bún chả Hà Nội với chả nướng than hoa, nước chấm cầu kỳ.", variants:["Thịt nạc","Thịt mỡ"], toppings:["Đu đủ chua ngọt","Rau thơm"], comments:[
+            { id:3, name:"Bún Chả", img:"images/Menu/Bun_cha/buncha.jpg", desc:"Bún chả là một món ăn của Việt Nam, bao gồm bún, chả thịt lợn nướng trên than hoa và bát nước mắm chua cay mặn ngọt. Món ăn xuất xứ từ miền Bắc Việt Nam, là thứ quà có sức sống lâu bền nhất của Hà Nội, nên có thể coi đây là một trong những đặc sản đặc trưng của ẩm thực Hà thành. Bún chả có nét tương tự món bún thịt nướng ở miền Trung và miền Nam, nhưng nước mắm pha có vị thanh nhẹ hơn.", variants:[{name:"Thịt nạc", img:"images/Menu/Bun_cha/thitnac.jpg"},{name:"Thịt mỡ", img:"images/Menu/Bun_cha/thitmo.jpg"}], toppings:[{name:"Đu đủ chua ngọt", img:"images/Menu/TOPPING/dudu.jpg"},{name:"Rau thơm", img:"images/Menu/TOPPING/rauthom.jpg"}], comments:[
                 {name:"Hùng", text:"Đậm đà hương than.", rating:5},
                 {name:"Mai", text:"Chấm rất vừa miệng.", rating:4},
-                {name:"An", text:"Phục vụ ổn.", rating:4},
                 {name:"Vy", text:"Quán đông giờ trưa.", rating:4},
                 {name:"Ngọc", text:"Sẽ giới thiệu cho bạn bè.", rating:5}
             ], rating:4.6},
-            { id:4, name:"Ram", img:"https://timtour.vn/files/images/AnGiNgon/Ram-thit-nuong-quang-ngai(2).jpg", desc:"Ram giòn, nhân tôm hoặc thịt, chấm tương cay.", variants:["Ram tôm","Ram thịt"], toppings:["Tương","Ớt"], comments:[
+            { id:4, name:"Nem rán", img:"images/Menu/Nem_ran/nemran.jpg", desc:"Nem rán (hay chả giò, chả ram hay chả đa nem) là tên một món ăn nổi tiếng của người Việt, chúng cũng được gọi tắt là nem theo cách gọi phổ biến ở miền Bắc. Ở miền Trung, món ăn này thường gọi là ram (riêng ở Thanh Hóa gọi là chả), còn ở miền Nam, nó được gọi là chả giò.", variants:[{name:"Nem chay", img:"images/Menu/Nem_ran/nemchay.jpg"},{name:"Nem thịt", img:"images/Menu/Nem_ran/nemthit.jpg"}], toppings:[{name:"Tương", img:"images/Menu/TOPPING/tuongot.jpg"},{name:"Ớt", img:"images/Menu/TOPPING/ot.jpg"}], comments:[
                 {name:"Bảo", text:"Giòn rụm!", rating:5},
                 {name:"Thu", text:"Nhân nhiều và đậm vị.", rating:4},
                 {name:"Tú", text:"Ăn kèm rau sống hợp lý.", rating:4},
                 {name:"Hà", text:"Món khai vị tuyệt.", rating:5},
                 {name:"Thanh", text:"Phù hợp mọi lứa tuổi.", rating:4}
             ], rating:4.3},
-            { id:5, name:"Chả dò", img:"https://www.google.com/search?sca_esv=78ad4a18d554e8c3&sxsrf=AE3TifNxX3fVGmaExy2IYASzbRooyEvycw:1760866449340&udm=2&fbs=AIIjpHyNLa7NbKa1H9FnKAJNsjCPuuyZ8axF70qppVREZw12J16j6TEYGEwZz6y4Q0FA_xM6YHD0TlzwvZm1rreNQvouQoF2_dc5xbJGrNcQh0JONbkndWU5v1cPI6lFx_rJr6uYFNQAitLBG9Fb8WaGsPzBRGhCBqtz2Uy56r5RcfJBY4BItARtcf4SUQ94qPpxdBnPt_70a5oOIrsi2Uba2r_MC0IFKjo-BkWZ3UFtOlLz_evgvi7U9P3-e8tYinTwqkU4Fiun&q=ch%E1%BA%A3+gi%C3%B2&sa=X&ved=2ahUKEwin0dbZ-q-QAxVQkK8BHWgoImYQtKgLegQIERAB&biw=385&bih=746&dpr=2.81#sv=CAMS9AQa1AQKhgIKuQEStgEKd0FMa3RfdkUtTEg0TzlRTmsxaHRoN1pnOWVNaEhrVF9qUGxLUGJGOXp2OC1Qa3lkT3lxQ2cxQ2tzbTBUQTVxUUpZTE5MeWZ1cTc5dng0eDBEVzNYaS0wRnhTZlpKckJFTnRXQ1oxYkVCOFZPbHkwREczNmZLWHhnEhdrckQwYU5lWEpMalUxZThQM3ZfMDJRNBoiQUZNQUdHcmNsYjNJOTNIazBpd2ZZOGQyMXlrU3AtS3BLURIDODQ5GgEzIg8KAXESCmNo4bqjIGdpw7IiBwoDdGJzEgAiJgoEZXFsZBIeQ2dJSUFCQUFPZ1FJQUJBQVZTN2hKajl0Tjk0a1B3ErYCCs8BEswBCowBQUxrdF92SG5fRVZRLUdyN2FnUTg4S0JkMDlpZDR2a21pQUtmSWcwUE5IX0ZJZWpYbnVuY2RyOGdIbUFXVkVtTUs3MklCVTBPYVJxWTlvdG4xdlVkUEo3M2h4V3pTYkttMmVUU3J5Y0FhZHZZYXJmTHlnZ2xleTgtOEdEb3J6WFJvdUd3OHFpSWdsMzISF2tyRDBhTmVYSkxqVTFlOFAzdl8wMlE0GiJBRk1BR0dwR2RQZElDNURzSmd4MXBBdElvcnlQdGdTWnRREgQ0Njk4GgEzIhgKBmltZ2RpaRIOMkU5UTJvUnE5NnY2Vk0iFwoFZG9jaWQSDkh6X2VhLXJ6aFIydnVNIiYKBGVxbGQSHkNnSUlBQkFBT2dRSUFCQUFWUzdoSmo5dE45NGtQdyoQZS0yRTlRMm9ScTk2djZWTSAEKhcKAXMSEGUtMkU5UTJvUnE5NnY2Vk0YATABGAcgyrypmgowAUoKCAIQAhgCIAIoAg", desc:"Chả truyền thống với gia vị đặc trưng.", variants:["Chiên","Hấp"], toppings:["Tỏi","Nước chấm"], comments:[
-                {name:"Nga", text:"Chả thơm ngon.", rating:4},
-                {name:"Dương", text:"Vị đậm đà.", rating:4},
-                {name:"Hương", text:"Ăn cùng cơm rất hợp.", rating:4},
-                {name:"Minh", text:"Phục vụ chu đáo.", rating:5},
-                {name:"Kiên", text:"Giá hơi cao chút.", rating:3}
-            ], rating:4.2},
-            { id:6, name:"Bún bò Huế", img:"https://i.ytimg.com/vi/CSI9ildGX9s/maxresdefault.jpg", desc:"Nước dùng cay nồng đặc trưng Huế, bún mềm.", variants:["Bún bò đặc biệt","Bún bò chay"], toppings:["Giò heo","Hành lá","Ớt"], comments:[
+            { id:6, name:"Bún bò Huế", img:"images/Menu/Bun_bo_hue/bunbohue.jpg", desc:"Bún bò Huế là một trong những đặc sản của thành phố Huế, mặc dù món bún này phổ biến trên cả ba miền ở Việt Nam và cả người Việt tại hải ngoại. Tại Thừa Thiên Huế, món này được gọi đơn giản là bún bò hoặc gọi cụ thể hơn là bún bò thịt bò. Các địa phương khác gọi là bún bò Huế, bún bò gốc Huế để chỉ xuất xứ của món ăn này.", variants:[{name:"Bún bò tái", img:"images/Menu/Bun_bo_hue/bunbotai.jpg"},{name:"Bún bò chay", img:"images/Menu/Bun_bo_hue/bunbochay.jpg"}], toppings:[{name:"Huyết", img:"images/Menu/TOPPING/huyet.jpg"},{name:"Hành lá", img:"images/Menu/TOPPING/hanhla.jpg"},{name:"Ớt", img:"images/Menu/TOPPING/ot.jpg"}], comments:[
                 {name:"Huệ", text:"Vị cay chuẩn Huế.", rating:5},
                 {name:"Long", text:"Nước dùng đậm đà.", rating:4},
                 {name:"Hùng", text:"Thịt mềm.", rating:4},
                 {name:"Vân", text:"Nêm vừa ăn.", rating:4},
                 {name:"Nam", text:"Khẩu vị miền Trung rõ rệt.", rating:5}
             ], rating:4.4},
-            { id:7, name:"Bánh bột lọc", img:"https://i.ytimg.com/vi/cIW9IrNk-5w/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBoydZw5qQrUU3i3fWMqwxdHa-iQA", desc:"Bánh bột lọc nhân tôm thịt, dai ngon.", variants:["Gói lá chuối","Hấp"], toppings:["Ớt chấm","Lá húng"], comments:[
+            { id:7, name:"Bánh bột lọc", img:"images/Menu/banh_bot_loc/img.jpg", desc:"Bánh bột lọc là một món ăn truyền thống của Việt Nam, có nguồn gốc từ Huế. Món bánh này phổ biến ở các tỉnh miền Trung như Nghệ An, Đà Nẵng,Quảng Trị và đặc biệt là Huế. Đây không chỉ là một món ăn vặt mà còn mang đậm giá trị văn hóa và lịch sử của người Việt.", variants:[{name:"Bánh bột lọc gói lá", img:"images/Menu/banh_bot_loc/bot-loc-goi-la.jpg"},{name:"Bánh bột lọc trần", img:"images/Menu/banh_bot_loc/bot-loc-tran.jpg"}], toppings:[{name:"Hành Phi", img:"images/Menu/TOPPING/hanhphi.jpg"},{name:"Mỡ hành", img:"images/Menu/TOPPING/mohanh.jpg"},{name:"Cốm", img:"images/Menu/TOPPING/com.jpg"},{name:"Nước mắm", img:"images/Menu/TOPPING/nuocmam.jpg"},{name:"Giá đỗ", img:"images/Menu/TOPPING/mohanh.jpg"}], comments:[
                 {name:"Hương", text:"Nhân đầy đặn.", rating:5},
                 {name:"Lan", text:"Vị ngon truyền thống.", rating:4},
                 {name:"Khoa", text:"Phù hợp ăn nhẹ.", rating:4},
                 {name:"Tiến", text:"Gói đẹp mắt.", rating:4},
                 {name:"Phương", text:"Ăn nóng ngon hơn.", rating:5}
+            ], rating:4.5},
+            { id:8, name:"Bún Hến", img:"images/Menu/bun_hen/bunhen.jpg", desc:"Bún hến là món ăn dân dã, đặc sản của vùng đất Cố Đô Huế và đặc biệt là làng Mai Xá (Quảng Trị). Theo truyền thống, bún hến được phát triển từ món bún thịt nướng của người Huế vào thế kỷ XIX. Nhưng khi người Huế không có đủ thịt để làm bún, họ đã sử dụng sò hến thay thế. Từ đó, bún hến đã ra đời và trở thành món ăn nổi tiếng của vùng đất này.", variants:[{name:"Cơm hến", img:"images/Menu/Bun_hen/comhen.jpg"},{name:"Cháo hến", img:"images/Menu/Bun_hen/chaohen.jpg"}], toppings:[{name:"Hành lá", img:"images/Menu/TOPPING/hanhla.jpg"},{name:"Mỡ hành", img:"images/Menu/TOPPING/mohanh.jpg"},{name:"Cốm", img:"images/Menu/TOPPING/com.jpg"},{name:"Nước mắm", img:"images/Menu/TOPPING/nuocmam.jpg"},{name:"Giá đỗ", img:"images/Menu/TOPPING/mohanh.jpg"}], comments:[
+                {name:"Thạch", text:"ôi thôi rồi", rating:5},
+                {name:"Hiếu", text:"Vị ngon truyền thống.", rating:4},
+                {name:"Minh", text:"Phù hợp ăn tối.", rating:4},
+                {name:"Kiệt", text:"Khá hợp vị.", rating:4},
+                {name:"Bảo", text:"Ăn nóng ngon nhất.", rating:5}
             ], rating:4.5}
         ];
 
-        // Render carousel dots
         const slidesEl = document.getElementById('slides');
         const dotsEl = document.getElementById('dots');
         const slideCount = slidesEl.children.length;
@@ -439,11 +471,9 @@
         document.getElementById('prev').addEventListener('click', ()=>{ goTo(current-1); resetAuto(); });
         document.getElementById('next').addEventListener('click', ()=>{ goTo(current+1); resetAuto(); });
 
-        // auto slide every 5s
         let autoId = setInterval(()=> goTo(current+1), 5000);
         function resetAuto(){ clearInterval(autoId); autoId = setInterval(()=> goTo(current+1), 5000); }
 
-        // Tabs logic
         document.querySelectorAll('.tab-btn').forEach(btn=>{
             btn.addEventListener('click', ()=>{
                 document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -454,18 +484,19 @@
             });
         });
 
-        // Render menu grid
         const grid = document.getElementById('menuGrid');
         function renderGrid(list){
             grid.innerHTML='';
-            list.forEach(d=>{
+            list.forEach((d,i)=>{
                 const card = document.createElement('article');
-                card.className='card';
+                card.className='card reveal';
+                card.style.setProperty('--d', `${Math.min(i, 20)*30}ms`);
                 card.dataset.id = d.id;
+                const truncatedDesc = d.desc.length > 100 ? d.desc.substring(0, 100) + '...' : d.desc;
                 card.innerHTML = `
                     <div class="imgwrap"><img src="${d.img}" alt="${d.name}"></div>
                     <h3>${d.name}</h3>
-                    <p>${d.desc}</p>
+                    <p>${truncatedDesc}</p>
                     <div class="comment-preview" aria-live="polite" tabindex="0">
                         <div class="cavatar" aria-hidden="true"></div>
                         <div class="cmeta"><div class="cname"></div><div class="ctext"></div></div>
@@ -474,7 +505,6 @@
                 card.addEventListener('click', ()=> openDish(d.id));
                 grid.appendChild(card);
 
-                // initialize per-card comment carousel (single visible comment)
                 (function initCardComments(cardEl, data){
                     const comments = Array.isArray(data.comments) ? data.comments : [];
                     const cavatar = cardEl.querySelector('.cavatar');
@@ -489,7 +519,6 @@
                         return;
                     }
 
-                    // populate scrollable items for smooth/snapping behavior
                     ctext.innerHTML = '';
                     comments.forEach(c=>{
                         const item = document.createElement('div');
@@ -498,7 +527,6 @@
                         ctext.appendChild(item);
                     });
 
-                    // derive display name from comment object
                     const deriveName = (c, i)=>{
                         if(c && c.name) return String(c.name).slice(0,24);
                         const parts = String(c?.text || '').trim().split(/[.!?…]/)[0].split(' ').slice(0,2).join(' ');
@@ -506,7 +534,6 @@
                     };
 
                     let idx = 0;
-                    // update avatar/name based on visible index
                     function updateMeta(i){
                         const clamped = (i + comments.length) % comments.length;
                         const name = deriveName(comments[clamped], clamped);
@@ -515,7 +542,6 @@
                         idx = clamped;
                     }
 
-                    // on scroll, compute nearest item index and update meta; snap once scroll stops
                     let raf = null, scrollEndTimer = null;
                     function onScroll(){
                         if(raf) cancelAnimationFrame(raf);
@@ -534,9 +560,7 @@
                         }, 120);
                     }
 
-                    // allow wheel to use native scrolling (no preventDefault) so browser momentum applies
                     ctext.addEventListener('scroll', onScroll, { passive:true });
-                    // keyboard support
                     preview.addEventListener('keydown', (ev)=>{
                         const itemEl = ctext.querySelector('.citem');
                         const h = itemEl ? itemEl.offsetHeight : 48;
@@ -544,7 +568,6 @@
                         if(ev.key === 'ArrowUp' || ev.key === 'PageUp'){ ctext.scrollBy({ top: -h, behavior:'smooth'}); ev.preventDefault(); }
                     });
 
-                    // initialize view
                     ctext.scrollTop = 0;
                     updateMeta(0);
                 })(card, d);
@@ -552,7 +575,6 @@
           }
          renderGrid(dishes);
 
-        // Search: prioritize matching names to top, keep others below
         const searchInp = document.getElementById('search');
         searchInp.addEventListener('input', (e)=>{
             const q = e.target.value.trim().toLowerCase();
@@ -564,7 +586,6 @@
             renderGrid([...matched, ...other]);
         });
 
-        // Modal detail
         const modal = document.getElementById('modal');
         const dlgTitle = document.getElementById('dlgTitle');
         const dlgImg = document.getElementById('dlgImg');
@@ -576,22 +597,49 @@
         document.getElementById('closeDlg').addEventListener('click', ()=> modal.classList.remove('active'));
         modal.addEventListener('click', (e)=> { if(e.target===modal) modal.classList.remove('active'); });
 
+        // Hàm tạo HTML cho các ngôi sao đánh giá
         function starsHtml(n){
             const full = Math.round(n);
             return '★'.repeat(full) + '☆'.repeat(5-full) + ` <span style="color:#888;font-weight:600;margin-left:8px">${n.toFixed(1)}/5</span>`;
         }
 
+        // Hàm mở và điền dữ liệu vào modal
         function openDish(id){
             const d = dishes.find(x=>x.id===id);
             if(!d) return;
             dlgTitle.textContent = d.name;
             dlgImg.src = d.img;
-            dlgDesc.textContent = d.desc;
-            dlgVars.innerHTML = d.variants.map(v=>`<div class="chip">${v}</div>`).join('');
-            dlgTops.innerHTML = d.toppings.map(t=>`<div class="chip">${t}</div>`).join('');
-            // show dish rating stars (synchronized with Reviews tab)
+            dlgDesc.textContent = d.desc;            
             dlgRating.innerHTML = starsHtml(d.rating);
-            // render comments with reviewer name + avatar + star if available
+
+            const createChip = (item) => {
+                const chip = document.createElement('div');
+                chip.className = 'chip';
+                chip.textContent = item.name;
+                chip.style.position = 'relative';
+
+                const preview = document.createElement('img');
+                preview.className = 'chip-preview';
+                preview.src = item.img;
+                preview.alt = item.name;
+                chip.appendChild(preview);
+
+                chip.addEventListener('mouseenter', () => {
+                    preview.style.opacity = '1';
+                    preview.style.transform = 'translateX(-50%) scale(1)';
+                });
+                chip.addEventListener('mouseleave', () => {
+                    preview.style.opacity = '0';
+                    preview.style.transform = 'translateX(-50%) scale(0.9)';
+                });
+                return chip;
+            };
+
+            dlgVars.innerHTML = '';
+            d.variants.forEach(v => dlgVars.appendChild(createChip(v)));
+            dlgTops.innerHTML = '';
+            d.toppings.forEach(t => dlgTops.appendChild(createChip(t)));
+
             dlgComments.innerHTML = d.comments.map(c=>{
                 const name = c.name || (String(c.text||'').split(/[.!?…]/)[0].split(' ').slice(0,2).join(' ')) || 'Người dùng';
                 const initial = (name.trim().charAt(0) || 'U').toUpperCase();
@@ -601,7 +649,6 @@
             modal.classList.add('active');
         }
 
-        // Reviews tab render
         const reviewList = document.getElementById('reviewList');
         function renderReviews(){
              reviewList.innerHTML = '';
@@ -609,7 +656,7 @@
                  const r = document.createElement('div'); r.className='review-item';
                 r.style.cursor = 'pointer';
                 r.dataset.id = d.id;
-                r.addEventListener('click', ()=> openDish(d.id)); // open dish details on click
+                r.addEventListener('click', ()=> openDish(d.id));
                  const stars = '★'.repeat(Math.round(d.rating)) + '☆'.repeat(5 - Math.round(d.rating));
                  r.innerHTML = `<div><strong>${d.name}</strong><div style="color:#888;font-size:13px">${d.rating.toFixed(1)} / 5</div></div><div style="font-size:18px;color:#f5a623">${stars}</div>`;
                  reviewList.appendChild(r);
@@ -617,19 +664,64 @@
          }
         renderReviews();
 
-        // Accessibility: pause carousel on hover
         const carousel = document.getElementById('carousel');
+        let isDragging = false, startX = 0, startTime = 0, basePct = 0;
+
+        function getX(evt){
+            if(evt.touches && evt.touches[0]) return evt.touches[0].clientX;
+            if(evt.changedTouches && evt.changedTouches[0]) return evt.changedTouches[0].clientX;
+            return evt.clientX;
+        }
+
+        function onPointerDown(e){
+            if(e.target.closest('.control-btn') || e.target.closest('.dots')) return;
+            isDragging = true;
+            startX = getX(e);
+            startTime = Date.now();
+            basePct = -current * 100;
+            slidesEl.style.transition = 'none';
+            carousel.classList.add('grabbing');
+            clearInterval(autoId);
+            e.preventDefault();
+        }
+        function onPointerMove(e){
+            if(!isDragging) return;
+            const dx = getX(e) - startX;
+            const pct = (dx / carousel.clientWidth) * 100;
+            slidesEl.style.transform = `translateX(calc(${basePct}% + ${pct}%))`;
+        }
+        function onPointerUp(e){
+            if(!isDragging) return;
+            isDragging = false;
+            carousel.classList.remove('grabbing');
+            slidesEl.style.transition = '';
+            const dx = getX(e) - startX;
+            const dt = Date.now() - startTime;
+            const threshold = Math.min(80, carousel.clientWidth * 0.15); // px
+            const fast = dt < 220 && Math.abs(dx) > 20;
+            if(Math.abs(dx) > threshold || fast){
+                if(dx > 0) goTo(current - 1); else goTo(current + 1);
+            } else {
+                goTo(current);
+            }
+            resetAuto();
+        }
+
+        carousel.addEventListener('pointerdown', onPointerDown, {passive:false});
+        window.addEventListener('pointermove', onPointerMove, {passive:true});
+        window.addEventListener('pointerup', onPointerUp, {passive:true});
+        carousel.addEventListener('touchstart', onPointerDown, {passive:false});
+        carousel.addEventListener('touchmove', onPointerMove, {passive:false});
+        carousel.addEventListener('touchend', onPointerUp, {passive:true});
+
         carousel.addEventListener('mouseenter', ()=> clearInterval(autoId));
         carousel.addEventListener('mouseleave', ()=> resetAuto());
 
-        // initial reset auto to ensure timing
         resetAuto();
 
-        // small utility to escape HTML in text content
         function escapeHtml(s){
             return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
         }
     </script>
 </body>
-
 </html>
